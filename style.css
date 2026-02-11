@@ -6,6 +6,25 @@
     --active-border: #0d6efd; /* Blue for active left border */
 }
 
+/* New styles for collapsible headers */
+.collapsible-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Adjust padding to make space for the arrow */
+    padding-right: 15px; 
+}
+
+.collapsible-header .toggle-arrow {
+    transition: transform 0.3s ease;
+    font-size: 0.9rem; /* Adjust arrow size if needed */
+}
+
+.collapsible-header.open .toggle-arrow {
+    transform: rotate(90deg);
+}
+
 .sidebar {
     min-width: var(--sidebar-width);
     max-width: var(--sidebar-width);

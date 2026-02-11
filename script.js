@@ -191,4 +191,91 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // --- Collapsible Sidebar Sections ---
+
+    // Custom toggle for individual LIs within a collapsible section
+    function toggleContentItems(items, isOpening) {
+        items.forEach(item => {
+            if (isOpening) {
+                item.style.display = 'block'; // Make it visible for height calculation
+                const height = item.scrollHeight + 'px'; // Get natural height
+                item.style.maxHeight = '0'; // Start from 0 for animation
+                item.style.overflow = 'hidden';
+                item.style.transition = 'max-height 0.3s ease-out, opacity 0.3s ease-out';
+                item.style.opacity = '0';
+                // Trigger reflow to ensure initial state is applied before transition
+                item.offsetHeight;
+                item.style.maxHeight = height;
+                item.style.opacity = '1';
+            } else {
+                item.style.maxHeight = item.scrollHeight + 'px'; // Set current height
+                item.style.opacity = '1';
+                item.style.transition = 'max-height 0.3s ease-out, opacity 0.3s ease-out';
+                // Trigger reflow
+                item.offsetHeight;
+                item.style.maxHeight = '0';
+                item.style.opacity = '0';
+                item.addEventListener('transitionend', function handler() {
+                    item.style.display = 'none';
+                    item.style.removeProperty('max-height');
+                    item.style.removeProperty('overflow');
+                    item.style.removeProperty('transition');
+                    item.style.removeProperty('opacity');
+                    item.removeEventListener('transitionend', handler);
+                }, { once: true });
+            }
+        });
+    }
+
+
+    const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+    const collapsibleSectionsData = [];
+
+    collapsibleHeaders.forEach(header => {
+        const arrow = header.querySelector('.toggle-arrow');
+        const contentItems = [];
+        let nextSibling = header.nextElementSibling;
+
+        while (nextSibling && !nextSibling.classList.contains('sidebar-heading')) {
+            contentItems.push(nextSibling);
+            nextSibling = nextSibling.nextElementSibling;
+        }
+
+        collapsibleSectionsData.push({
+            header: header,
+            arrow: arrow,
+            content: contentItems,
+            isOpen: false
+        });
+
+        // Initially hide all content items associated with these headers
+        contentItems.forEach(item => {
+            item.style.maxHeight = '0';
+            item.style.overflow = 'hidden';
+            item.style.display = 'none';
+            item.style.opacity = '0';
+            item.style.transition = 'max-height 0.3s ease-out, opacity 0.3s ease-out'; // Ensure transition is set
+        });
+
+        header.addEventListener('click', function() {
+            const currentSection = collapsibleSectionsData.find(section => section.header === header);
+
+            collapsibleSectionsData.forEach(section => {
+                if (section !== currentSection && section.isOpen) {
+                    section.header.classList.remove('open');
+                    if (section.arrow) section.arrow.classList.remove('open');
+                    toggleContentItems(section.content, false); // Close other open sections
+                    section.isOpen = false;
+                }
+            });
+
+            currentSection.isOpen = !currentSection.isOpen;
+            currentSection.header.classList.toggle('open', currentSection.isOpen);
+            if (currentSection.arrow) currentSection.arrow.classList.toggle('open', currentSection.isOpen);
+
+            toggleContentItems(currentSection.content, currentSection.isOpen); // Toggle clicked section
+        });
+    });
+
 });
