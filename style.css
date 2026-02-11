@@ -96,8 +96,8 @@
 
 .sidebar ul li a:hover {
     color: var(--primary-blue);
-    background: var(--hover-bg);
-    border-left-color: transparent; /* Keep transparent on hover if not active */
+    background: var(--active-bg); /* Changed from var(--hover-bg) */
+    border-left-color: var(--active-border); /* Changed from transparent */
 }
 
 /* Active state for parent and child links */
@@ -139,7 +139,7 @@
 }
 
 .sidebar ul ul li {
-    padding-left: 15px; /* Indent sub-items */
+    padding-left: 0; /* Changed from 15px */
 }
 
 .sidebar ul ul li a.active {

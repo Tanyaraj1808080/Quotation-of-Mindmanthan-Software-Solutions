@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindmanthan Software Solutions | Follow Ups</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar Placeholder -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-navbar">
+                <div class="d-flex align-items-center">
+                    <h5 class="mb-0">Follow Ups Management</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="input-group me-3">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <button class="btn btn-outline-secondary" type="button"><i class="bi bi-search"></i></button>
+                    </div>
+                    <a href="#" class="nav-link me-3"><i class="bi bi-bell-fill"></i></a>
+                    <a href="#" class="nav-link me-3"><i class="bi bi-gear-fill"></i></a>
+                    <a href="#" class="nav-link">
+                        <img src="https://i.pravatar.cc/40" alt="User" class="rounded-circle">
+                    </a>
+                    <a href="#" class="nav-link ms-3" id="navbar-logout-link">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </a>
+                </div>
+            </header>
+
+            <section class="p-4">
+                <h2 class="mb-4">Follow Ups Overview</h2>
+
+                <!-- Follow Ups KPI Cards -->
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card kpi-card">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="kpi-icon bg-primary">
+                                    <i class="bi bi-clock-history"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-0 text-muted">Total Follow Ups</p>
+                                    <h4 class="mb-0">45</h4>
+                                </div>
+                                <div class="ms-auto">
+                                    <span class="badge bg-success">+8%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card kpi-card">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="kpi-icon bg-success">
+                                    <i class="bi bi-check-circle"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-0 text-muted">Completed Follow Ups</p>
+                                    <h4 class="mb-0">30</h4>
+                                </div>
+                                <div class="ms-auto">
+                                    <span class="badge bg-success">+10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card kpi-card">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="kpi-icon bg-warning">
+                                    <i class="bi bi-hourglass-split"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-0 text-muted">Pending Follow Ups</p>
+                                    <h4 class="mb-0">15</h4>
+                                </div>
+                                <div class="ms-auto">
+                                    <span class="badge bg-danger">-2%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Follow Ups List Table -->
+                <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        Follow Ups List
+                        <div>
+                            <input type="text" class="form-control form-control-sm d-inline-block w-auto me-2" placeholder="Search follow up...">
+                            <button class="btn btn-sm btn-primary"><i class="bi bi-plus-lg me-1"></i> Add Follow Up</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Client/Lead</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Discuss Project Proposal</td>
+                                        <td>Alpha Corp</td>
+                                        <td>2024-02-20</td>
+                                        <td><span class="badge bg-warning">Pending</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-info me-1"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gather Requirements</td>
+                                        <td>John Doe (Lead)</td>
+                                        <td>2024-02-18</td>
+                                        <td><span class="badge bg-success">Completed</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-info me-1"><i class="bi bi-eye"></i></button>
+                                            <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Follow Up Priority Chart Placeholder -->
+                <div class="card chart-card">
+                    <div class="card-header">
+                        Follow Up Priority Distribution
+                    </div>
+                    <div class="card-body">
+                        <canvas id="followUpPriorityChart"></canvas>
+                        <p class="text-muted text-center mt-3">Placeholder for a Chart.js follow up priority distribution chart.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
