@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <div class="d-flex">
@@ -45,6 +46,7 @@
                         <div>
                             <input type="text" class="form-control form-control-sm d-inline-block w-auto me-2" placeholder="Search quotation...">
                             <button class="btn btn-sm btn-primary"><i class="bi bi-plus-lg me-1"></i> Create New Quotation</button>
+                            <button class="btn btn-sm btn-outline-secondary ms-2" id="export-csv-btn"><i class="bi bi-download me-1"></i> Export to CSV</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -62,39 +64,42 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>Q-001</td>
+                                        <td>Q-001 (v3)</td>
                                         <td>Alpha Corp</td>
                                         <td>$15,000</td>
                                         <td>2024-02-01</td>
                                         <td><span class="badge bg-success">Approved</span></td>
                                         <td>
-                                            <button class="btn btn-sm btn-outline-info me-1"><i class="bi bi-eye"></i></button>
+                                            <a href="quotation-details.html" class="btn btn-sm btn-outline-info me-1"><i class="bi bi-eye"></i></a>
                                             <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger me-1"><i class="bi bi-trash"></i></button>
+                                            <button class="btn btn-sm btn-outline-secondary download-pdf-btn"><i class="bi bi-download"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Q-002</td>
                                         <td>Beta Ltd</td>
-                                        <td>$22,000</td>
+                                        <td>€20,200</td>
                                         <td>2024-02-05</td>
                                         <td><span class="badge bg-warning">Pending</span></td>
                                         <td>
                                             <button class="btn btn-sm btn-outline-info me-1"><i class="bi bi-eye"></i></button>
                                             <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger me-1"><i class="bi bi-trash"></i></button>
+                                            <button class="btn btn-sm btn-outline-secondary download-pdf-btn"><i class="bi bi-download"></i></button>
                                         </td>
                                     </tr>
                                      <tr>
                                         <td>Q-003</td>
                                         <td>Gamma Solutions</td>
-                                        <td>$8,000</td>
+                                        <td>₹6,60,000</td>
                                         <td>2024-02-10</td>
                                         <td><span class="badge bg-danger">Rejected</span></td>
                                         <td>
                                             <button class="btn btn-sm btn-outline-info me-1"><i class="bi bi-eye"></i></button>
                                             <button class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                            <button class="btn btn-sm btn-outline-danger me-1"><i class="bi bi-trash"></i></button>
+                                            <button class="btn btn-sm btn-outline-secondary download-pdf-btn"><i class="bi bi-download"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -104,6 +109,47 @@
                 </div>
 
             </section>
+            
+            <!-- PDF Template (Hidden) -->
+            <div id="quotation-pdf-template" style="position: absolute; left: -9999px; width: 800px; padding: 20px; font-family: Arial, sans-serif;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #ccc; padding-bottom: 10px;">
+                    <div>
+                        <h1 style="margin: 0; color: #333;">Quotation</h1>
+                        <p style="margin: 5px 0 0; color: #555;">Mindmanthan Software Solutions</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <p style="margin: 0;"><strong>Quotation ID:</strong> <span id="pdf-quotation-id"></span></p>
+                        <p style="margin: 5px 0 0;"><strong>Date:</strong> <span id="pdf-date"></span></p>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <p style="margin: 0;"><strong>To:</strong> <span id="pdf-client-name"></span></p>
+                </div>
+                <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Description</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: right;">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Project Services based on Quotation <span id="pdf-item-id"></span></td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: right;"><span id="pdf-total-value"></span></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td style="padding: 8px; text-align: right;"><strong>Total</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 8px; text-align: right;"><strong><span id="pdf-grand-total"></span></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div style="margin-top: 30px; font-size: 12px; color: #777;">
+                    <p>Thank you for your business!</p>
+                </div>
+            </div>
+
         </main>
     </div>
 

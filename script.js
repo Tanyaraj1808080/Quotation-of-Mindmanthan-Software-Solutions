@@ -487,4 +487,109 @@ document.addEventListener('DOMContentLoaded', function() {
     if (navbarLogoutLink) {
         navbarLogoutLink.addEventListener('click', handleLogout);
     }
+
+    // --- New Feature: Export Table to CSV ---
+    const exportBtn = document.getElementById('export-csv-btn');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', function() {
+            const table = document.querySelector('.table'); // Find the table to export
+            if (!table) {
+                console.error("Could not find the table to export.");
+                return;
+            }
+            exportTableToCSV(table, 'quotations-export.csv');
+        });
+    }
+
+    function exportTableToCSV(table, filename) {
+        const rows = table.querySelectorAll('tr');
+        let csv = [];
+        
+        // Process header row, skipping the last cell ('Actions')
+        const headers = rows[0].querySelectorAll('th');
+        let headerRow = [];
+        for (let i = 0; i < headers.length - 1; i++) { // Stop before the last header
+            headerRow.push(`"${headers[i].innerText.replace(/"/g, '""')}"`);
+        }
+        csv.push(headerRow.join(','));
+
+        // Process data rows, skipping the last cell ('Actions')
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            const cols = row.querySelectorAll('td');
+            let rowData = [];
+            for (let j = 0; j < cols.length - 1; j++) { // Stop before the last cell
+                // For the 'Status' column, get the text from the span inside
+                let cellText = cols[j].innerText;
+                if (cols[j].querySelector('.badge')) {
+                    cellText = cols[j].querySelector('.badge').innerText;
+                }
+                rowData.push(`"${cellText.replace(/"/g, '""')}"`);
+            }
+            csv.push(rowData.join(','));
+        }
+
+        // Trigger download
+        downloadCSV(csv.join('\n'), filename);
+    }
+
+    function downloadCSV(csvContent, filename) {
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        
+        if (link.download !== undefined) { // Feature detection
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }
+
+    // --- New Feature: Generate PDF from Table Row ---
+    const pdfButtons = document.querySelectorAll('.download-pdf-btn');
+    if (pdfButtons.length > 0) {
+        pdfButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Find the parent table row to get the data from
+                const tableRow = this.closest('tr');
+                if (!tableRow) return;
+
+                // Extract data from the table cells
+                const quotationId = tableRow.cells[0].innerText;
+                const clientName = tableRow.cells[1].innerText;
+                const totalValue = tableRow.cells[2].innerText;
+                const dateCreated = tableRow.cells[3].innerText;
+                
+                // Get the PDF template element
+                const pdfTemplate = document.getElementById('quotation-pdf-template');
+                if (!pdfTemplate) {
+                    console.error("PDF template not found!");
+                    return;
+                }
+
+                // Populate the template with the data
+                pdfTemplate.querySelector('#pdf-quotation-id').innerText = quotationId;
+                pdfTemplate.querySelector('#pdf-item-id').innerText = quotationId;
+                pdfTemplate.querySelector('#pdf-date').innerText = dateCreated;
+                pdfTemplate.querySelector('#pdf-client-name').innerText = clientName;
+                pdfTemplate.querySelector('#pdf-total-value').innerText = totalValue;
+                pdfTemplate.querySelector('#pdf-grand-total').innerText = totalValue;
+
+                // Configure html2pdf
+                const options = {
+                    margin: 0.5,
+                    filename: `Quotation-${quotationId}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+
+                // Generate and download the PDF
+                html2pdf().from(pdfTemplate).set(options).save();
+            });
+        });
+    }
 });
