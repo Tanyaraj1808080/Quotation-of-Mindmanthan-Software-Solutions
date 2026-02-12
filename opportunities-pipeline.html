@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindmanthan Software Solutions | Opportunity Pipeline</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="kanban.css">
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar Placeholder -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-navbar">
+                <div class="d-flex align-items-center">
+                    <h5 class="mb-0">Opportunity Pipeline</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-primary btn-sm me-3"><i class="bi bi-plus-lg"></i> Add Opportunity</button>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <button class="btn btn-outline-secondary" type="button"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </header>
+
+            <section class="p-4">
+                <div class="kanban-board-container">
+                    <div class="kanban-board">
+
+                        <!-- New Column -->
+                        <div class="kanban-column">
+                            <div class="kanban-column-header">
+                                <h6>New (2)</h6>
+                            </div>
+                            <div class="kanban-column-body">
+                                <div class="kanban-card">
+                                    <div class="kanban-card-body">
+                                        <p class="fw-bold mb-1">E-commerce Platform</p>
+                                        <p class="small text-muted mb-2">Creative Designs Co.</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-bold text-success">$35,000</span>
+                                            <img src="https://i.pravatar.cc/24?u=user1" alt="User" class="rounded-circle">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kanban-card">
+                                    <div class="kanban-card-body">
+                                        <p class="fw-bold mb-1">CRM Integration</p>
+                                        <p class="small text-muted mb-2">Global Solutions Ltd.</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-bold text-success">$18,000</span>
+                                            <img src="https://i.pravatar.cc/24?u=user2" alt="User" class="rounded-circle">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Qualification Column -->
+                        <div class="kanban-column">
+                            <div class="kanban-column-header">
+                                <h6>Qualification (1)</h6>
+                            </div>
+                            <div class="kanban-column-body">
+                                <div class="kanban-card">
+                                    <div class="kanban-card-body">
+                                        <p class="fw-bold mb-1">Mobile App Development</p>
+                                        <p class="small text-muted mb-2">Beta Ltd</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-bold text-success">$50,000</span>
+                                            <img src="https://i.pravatar.cc/24?u=user1" alt="User" class="rounded-circle">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proposal Sent Column -->
+                        <div class="kanban-column">
+                            <div class="kanban-column-header">
+                                <h6>Proposal Sent (1)</h6>
+                            </div>
+                            <div class="kanban-column-body">
+                                <div class="kanban-card">
+                                    <div class="kanban-card-body">
+                                        <p class="fw-bold mb-1">Website Redesign Project</p>
+                                        <p class="small text-muted mb-2">Alpha Corp</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-bold text-success">$25,000</span>
+                                            <img src="https://i.pravatar.cc/24?u=user2" alt="User" class="rounded-circle">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Negotiation Column -->
+                        <div class="kanban-column">
+                            <div class="kanban-column-header">
+                                <h6>Negotiation (0)</h6>
+                            </div>
+                            <div class="kanban-column-body">
+                                <!-- No cards -->
+                            </div>
+                        </div>
+
+                        <!-- Won Column -->
+                        <div class="kanban-column">
+                            <div class="kanban-column-header text-success">
+                                <h6>Won (1)</h6>
+                            </div>
+                            <div class="kanban-column-body">
+                               <div class="kanban-card border-start-success">
+                                    <div class="kanban-card-body">
+                                        <p class="fw-bold mb-1">Cloud Migration</p>
+                                        <p class="small text-muted mb-2">Delta Inc.</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-bold text-success">$40,000</span>
+                                            <img src="https://i.pravatar.cc/24?u=user1" alt="User" class="rounded-circle">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <!-- In a real app, you would include a library like SortableJS for drag-and-drop -->
+</body>
+</html>

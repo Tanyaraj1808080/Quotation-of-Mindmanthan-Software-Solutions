@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindmanthan Software Solutions | Create Template</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar Placeholder -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-navbar">
+                <div class="d-flex align-items-center">
+                    <h5 class="mb-0">Create New Template</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="input-group me-3">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <button class="btn btn-outline-secondary" type="button"><i class="bi bi-search"></i></button>
+                    </div>
+                    <a href="#" class="nav-link me-3"><i class="bi bi-bell-fill"></i></a>
+                    <a href="#" class="nav-link me-3"><i class="bi bi-gear-fill"></i></a>
+                    <a href="#" class="nav-link">
+                        <img src="https://i.pravatar.cc/40" alt="User" class="rounded-circle">
+                    </a>
+                    <a href="#" class="nav-link ms-3" id="navbar-logout-link">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </a>
+                </div>
+            </header>
+
+            <section class="p-4">
+                <h2 class="mb-4">New Quotation Template</h2>
+
+                <div class="card">
+                    <div class="card-header">Template Details</div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="templateName" class="form-label">Template Name</label>
+                                <input type="text" class="form-control" id="templateName" placeholder="e.g., Standard Website Package">
+                            </div>
+
+                            <hr>
+
+                            <h5>Template Items</h5>
+                            <div id="template-items-container">
+                                <!-- Initial Item Row -->
+                                <div class="row align-items-end template-item mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Description</label>
+                                        <input type="text" class="form-control" placeholder="Service or product description">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-label">Quantity</label>
+                                        <input type="number" class="form-control" value="1">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Price</label>
+                                        <input type="number" class="form-control" placeholder="0.00">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type="button" class="btn btn-danger w-100"><i class="bi bi-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" id="add-item-btn" class="btn btn-outline-primary mt-2"><i class="bi bi-plus"></i> Add Item</button>
+
+                            <hr>
+
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-success"><i class="bi bi-check-lg me-1"></i> Save Template</button>
+                                <a href="templates.html" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Basic script to add/remove item rows for the template form
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('template-items-container');
+            const addItemBtn = document.getElementById('add-item-btn');
+
+            if (addItemBtn) {
+                addItemBtn.addEventListener('click', function() {
+                    const itemRow = container.querySelector('.template-item').cloneNode(true);
+                    // Clear input values in the new row
+                    itemRow.querySelectorAll('input').forEach(input => input.value = '');
+                    container.appendChild(itemRow);
+                });
+            }
+
+            // Add event listener for remove buttons (delegated)
+            if (container) {
+                container.addEventListener('click', function(e) {
+                    if (e.target && e.target.closest('.btn-danger')) {
+                        // Prevent removing the last item
+                        if (container.querySelectorAll('.template-item').length > 1) {
+                            e.target.closest('.template-item').remove();
+                        } else {
+                            alert("You must have at least one item in the template.");
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

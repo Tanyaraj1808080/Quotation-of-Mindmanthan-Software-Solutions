@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindmanthan Software Solutions | Create Invoice</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar Placeholder -->
+        <div id="sidebar-placeholder"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-navbar">
+                <div class="d-flex align-items-center">
+                    <h5 class="mb-0">Create Invoice</h5>
+                </div>
+                <div class="d-flex align-items-center">
+                    <a href="#" class="nav-link">
+                        <img src="https://i.pravatar.cc/40" alt="User" class="rounded-circle">
+                    </a>
+                </div>
+            </header>
+
+            <section class="p-4">
+                <h2 class="mb-4">New Invoice</h2>
+
+                <div class="alert alert-info" role="alert">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    This invoice was generated from Quotation <strong>Q-001</strong>.
+                </div>
+
+                <div class="card">
+                    <div class="card-header">Invoice Details</div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="clientName" class="form-label">Client</label>
+                                    <input type="text" class="form-control" id="clientName" value="Alpha Corp" readonly>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="issueDate" class="form-label">Issue Date</label>
+                                    <input type="date" class="form-control" id="issueDate">
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="dueDate" class="form-label">Due Date</label>
+                                    <input type="date" class="form-control" id="dueDate">
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <h5>Invoice Items</h5>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th class="text-end">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Project Services based on Quotation Q-001</td>
+                                        <td class="text-end">$15,000</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-end border-0"><strong>Total</strong></td>
+                                        <td class="text-end border-0"><strong>$15,000</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <hr>
+
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-success"><i class="bi bi-check-lg me-1"></i> Save Invoice</button>
+                                <a href="invoices.html" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
