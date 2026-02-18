@@ -38,7 +38,7 @@
             <section class="p-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="mb-0">Custom Report Builder</h2>
-                    <button class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i> Create New Report</button>
+                    <button class="btn btn-primary" id="create-new-report-btn"><i class="bi bi-plus-lg me-1"></i> Create New Report</button>
                 </div>
 
                 <div class="card mb-4">
@@ -86,7 +86,7 @@
                             </div>
                             <div class="text-end">
                                 <button type="button" class="btn btn-success" id="generate-report-btn"><i class="bi bi-play-circle me-1"></i> Generate Report</button>
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Save Report</button>
+                                <button type="button" class="btn btn-primary" id="save-report-btn"><i class="bi bi-save me-1"></i> Save Report</button>
                             </div>
                         </form>
                     </div>
@@ -94,18 +94,18 @@
 
                 <!-- Report Output Section (Dynamic) -->
                 <div id="report-output" class="card mb-4" style="display: none;">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         Report Output
+                        <span class="badge bg-info text-dark">Note: Reports are generated using sample mock data.</span>
                     </div>
                     <div class="card-body">
-                        <div class="text-center my-4">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                            <p class="mt-2">Generating report...</p>
-                        </div>
                         <div id="generated-report-content">
-                            <!-- Report content will be injected here -->
+                            <div class="text-center my-4">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2">Generating report...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="saved-reports-tbody">
                                     <tr>
                                         <td>Monthly Approved Quotations by Client</td>
                                         <td>Quotations</td>
@@ -154,47 +154,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const generateReportBtn = document.getElementById('generate-report-btn');
-            const reportOutputDiv = document.getElementById('report-output');
-            const generatedReportContent = document.getElementById('generated-report-content');
-
-            if (generateReportBtn) {
-                generateReportBtn.addEventListener('click', function() {
-                    const dataSource = document.getElementById('dataSource').value;
-                    const reportType = document.getElementById('reportType').value;
-                    const fieldsSelect = document.getElementById('fields');
-                    const selectedFields = Array.from(fieldsSelect.selectedOptions).map(option => option.value);
-                    const filters = document.getElementById('filters').value;
-
-                    // Show loading spinner
-                    reportOutputDiv.style.display = 'block';
-                    generatedReportContent.innerHTML = `
-                        <div class="text-center my-4">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                            <p class="mt-2">Generating report for <strong>${dataSource}</strong>...</p>
-                        </div>
-                    `;
-
-                    setTimeout(function() {
-                        generatedReportContent.innerHTML = `
-                            <h5>Generated Report (Mock Data)</h5>
-                            <p><strong>Data Source:</strong> ${dataSource}</p>
-                            <p><strong>Report Type:</strong> ${reportType}</p>
-                            <p><strong>Selected Fields:</strong> ${selectedFields.join(', ')}</p>
-                            <p><strong>Filters Applied:</strong> ${filters || 'None'}</p>
-                            <div class="alert alert-success mt-3" role="alert">
-                                Report generated successfully with mock data. In a real application, dynamic data and visualizations would appear here.
-                            </div>
-                        `;
-                    }, 1500); // Simulate 1.5 seconds loading time
-                });
-            }
-        });
-    </script>
 </body>
 </html>

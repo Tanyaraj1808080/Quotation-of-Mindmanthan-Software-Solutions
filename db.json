@@ -1,0 +1,124 @@
+{
+  "quotations": [
+    {
+      "id": "Q-001",
+      "version": 3,
+      "clientName": "Alpha Corp",
+      "totalValue": 15500,
+      "currency": "USD",
+      "dateCreated": "2026-02-10",
+      "status": "Approved"
+    },
+    {
+      "id": "Q-002",
+      "version": 1,
+      "clientName": "Beta Ltd",
+      "totalValue": 22000,
+      "currency": "USD",
+      "dateCreated": "2026-02-05",
+      "status": "Pending"
+    },
+    {
+      "id": "Q-003",
+      "version": 1,
+      "clientName": "Gamma Solutions",
+      "totalValue": 8000,
+      "currency": "USD",
+      "dateCreated": "2026-02-10",
+      "status": "Rejected"
+    },
+    {
+      "id": "Q-004",
+      "version": 1,
+      "clientName": "Delta Inc.",
+      "totalValue": 10000,
+      "currency": "USD",
+      "dateCreated": "2026-02-12",
+      "status": "Pending"
+    },
+    {
+      "id": "Q-005",
+      "clientName": "Tech Innovations",
+      "totalValue": 30000,
+      "dateCreated": "2024-01-28",
+      "status": "Approved"
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "name": "Alpha Corp",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "name": "Beta Ltd",
+      "status": "Active"
+    },
+    {
+      "id": 3,
+      "name": "Gamma Solutions",
+      "status": "Inactive"
+    },
+    {
+      "id": 4,
+      "name": "Tech Innovations Inc.",
+      "contactPerson": "Alice Johnson",
+      "email": "alice@techinnov.com",
+      "phone": "+1 (555) 123-4567",
+      "status": "Active"
+    },
+    {
+      "id": 5,
+      "name": "Global Solutions Ltd.",
+      "contactPerson": "Bob Williams",
+      "email": "bob@globalsol.com",
+      "phone": "+1 (555) 987-6543",
+      "status": "Active"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "INV-001",
+      "clientId": 1,
+      "clientName": "Alpha Corp",
+      "amount": 15000,
+      "issueDate": "2026-02-02",
+      "dueDate": "2026-03-02",
+      "status": "Paid"
+    },
+    {
+      "id": "INV-002",
+      "clientId": 2,
+      "clientName": "Tech Innovations",
+      "amount": 30000,
+      "issueDate": "2026-01-29",
+      "dueDate": "2026-02-29",
+      "status": "Pending"
+    }
+  ],
+  "reports": [
+    {
+      "name": "My Custom Report",
+      "dataSource": "Quotations",
+      "reportType": "Bar Chart",
+      "fields": [
+        "Quotation ID"
+      ],
+      "filters": "",
+      "id": "REP-1771393522865",
+      "lastGenerated": "2026-02-18"
+    },
+    {
+      "name": "My Custom Report",
+      "dataSource": "Quotations",
+      "reportType": "Bar Chart",
+      "fields": [
+        "Quotation ID"
+      ],
+      "filters": "",
+      "id": "REP-1771394041902",
+      "lastGenerated": "2026-02-18"
+    }
+  ]
+}
