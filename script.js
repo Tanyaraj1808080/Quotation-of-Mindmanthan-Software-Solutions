@@ -599,7 +599,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!tableBody) return; // Only run on the all-quotations page
 
         try {
-            const response = await fetch('http://localhost:3000/api/quotations');
+            const response = await fetch('/api/quotations');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -645,7 +645,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const quotationId = deleteButton.dataset.id;
                     if (confirm(`Are you sure you want to delete quotation ${quotationId}?`)) {
                         try {
-                            const response = await fetch(`http://localhost:3000/api/quotations/${quotationId}`, {
+                            const response = await fetch(`/api/quotations/${quotationId}`, {
                                 method: 'DELETE',
                             });
 
@@ -679,7 +679,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!tableBody) return; // Only run on the clients page
 
         try {
-            const response = await fetch('http://localhost:3000/api/clients');
+            const response = await fetch('/api/clients');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -723,7 +723,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const clientId = deleteButton.dataset.id;
                     if (confirm(`Are you sure you want to delete this client?`)) {
                         try {
-                            const response = await fetch(`http://localhost:3000/api/clients/${clientId}`, {
+                            const response = await fetch(`/api/clients/${clientId}`, {
                                 method: 'DELETE',
                             });
 
@@ -755,7 +755,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!tableBody) return; // Only run on the invoices page
 
         try {
-            const response = await fetch('http://localhost:3000/api/invoices');
+            const response = await fetch('/api/invoices');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -800,7 +800,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const invoiceId = deleteButton.dataset.id;
                     if (confirm(`Are you sure you want to delete invoice ${invoiceId}?`)) {
                         try {
-                            const response = await fetch(`http://localhost:3000/api/invoices/${invoiceId}`, {
+                            const response = await fetch(`/api/invoices/${invoiceId}`, {
                                 method: 'DELETE',
                             });
 
@@ -864,7 +864,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             try {
-                const response = await fetch('http://localhost:3000/api/quotations', {
+                const response = await fetch('/api/quotations', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -898,7 +898,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!savedReportsTbody) return;
 
         try {
-            const response = await fetch('http://localhost:3000/api/reports');
+            const response = await fetch('/api/reports');
             if (!response.ok) throw new Error('Failed to fetch reports');
             
             savedReportsData = await response.json(); // Store the data
@@ -978,7 +978,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 if (reportToDelete && confirm(`Are you sure you want to delete the report "${reportToDelete.name}"?`)) {
                     try {
-                        const response = await fetch(`http://localhost:3000/api/reports/${reportId}`, {
+                        const response = await fetch(`/api/reports/${reportId}`, {
                             method: 'DELETE'
                         });
 
@@ -1146,7 +1146,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             try {
-                const response = await fetch('http://localhost:3000/api/reports', {
+                const response = await fetch('/api/reports', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

@@ -38,6 +38,7 @@ const writeDb = async (db) => {
         await fs.writeFile(dbPath, JSON.stringify(db, null, 2), 'utf8');
     } catch (error) {
         console.error("Error writing to database:", error);
+        throw error; // Re-throw to handle it in the caller
     }
 };
 
@@ -140,38 +141,48 @@ app.get('/api/reports', async (req, res) => {
 
 // POST a new saved report
 app.post('/api/reports', async (req, res) => {
-    const db = await readDb();
-    const newReport = req.body;
+    try {
+        const db = await readDb();
+        const newReport = req.body;
 
-    // Basic validation
-    if (!newReport || !newReport.name || !newReport.dataSource || !newReport.reportType) {
-        return res.status(400).json({ message: 'Missing required report configuration fields' });
+        // Basic validation
+        if (!newReport || !newReport.name || !newReport.dataSource || !newReport.reportType) {
+            return res.status(400).json({ message: 'Missing required report configuration fields' });
+        }
+
+        // Generate a new ID
+        newReport.id = `REP-${Date.now()}`;
+        newReport.lastGenerated = new Date().toISOString().split('T')[0]; // Set current date
+
+        db.reports.push(newReport);
+        await writeDb(db);
+
+        res.status(201).json(newReport);
+    } catch (error) {
+        console.error("Error in POST /api/reports:", error);
+        res.status(500).json({ message: 'Internal Server Error while saving the report.' });
     }
-
-    // Generate a new ID
-    newReport.id = `REP-${Date.now()}`;
-    newReport.lastGenerated = new Date().toISOString().split('T')[0]; // Set current date
-
-    db.reports.push(newReport);
-    await writeDb(db);
-
-    res.status(201).json(newReport);
 });
 
 // DELETE a saved report
 app.delete('/api/reports/:id', async (req, res) => {
-    const db = await readDb();
-    const { id } = req.params;
+    try {
+        const db = await readDb();
+        const { id } = req.params;
 
-    const initialLength = db.reports.length;
-    db.reports = db.reports.filter(r => r.id !== id);
+        const initialLength = db.reports.length;
+        db.reports = db.reports.filter(r => r.id !== id);
 
-    if (db.reports.length === initialLength) {
-        return res.status(404).json({ message: 'Report not found' });
+        if (db.reports.length === initialLength) {
+            return res.status(404).json({ message: 'Report not found' });
+        }
+
+        await writeDb(db);
+        res.status(204).send(); // No Content
+    } catch (error) {
+        console.error("Error in DELETE /api/reports:", error);
+        res.status(500).json({ message: 'Internal Server Error while deleting the report.' });
     }
-
-    await writeDb(db);
-    res.status(204).send(); // No Content
 });
 
 
